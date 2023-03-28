@@ -6,76 +6,76 @@ typedef struct IUnknown IUnknown;
 
 namespace Bytebeats
 {
-    DWORD WINAPI Bytebeat1(LPVOID lpvd)
-    {
-        while (1)
-        {
-            HWAVEOUT hWaveOut = 0;
-            WAVEFORMATEX wfx = { WAVE_FORMAT_PCM, 1, 8000, 8000, 1, 8, 0 };
-            waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
+	DWORD WINAPI Bytebeat1(LPVOID lpvd)
+	{
+		while (1)
+		{
+		    HWAVEOUT hWaveOut = 0;
+		    WAVEFORMATEX wfx = { WAVE_FORMAT_PCM, 1, 8000, 8000, 1, 8, 0 };
+		    waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
 
-            BYTE sbuffer[17000 * 60];
+		    BYTE sbuffer[17000 * 60];
 
-            DWORD d = 1000;
-            DWORD c = 0;
+		    DWORD d = 1000;
+		    DWORD c = 0;
 
-            for (DWORD t = 0; t < sizeof(sbuffer); t++)
-            {
-                sbuffer[t] = t * sinf((PI * t * 2 / 100000));
-            }
+		    for (DWORD t = 0; t < sizeof(sbuffer); t++)
+		    {
+			sbuffer[t] = t * sinf((PI * t * 2 / 100000));
+		    }
 
-            WAVEHDR header = { (LPSTR)sbuffer, sizeof(sbuffer), 0, 0, 0, 0, 0, 0 };
-            waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
-            waveOutWrite(hWaveOut, &header, sizeof(WAVEHDR));
-            waveOutUnprepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
-            waveOutClose(hWaveOut);
+		    WAVEHDR header = { (LPSTR)sbuffer, sizeof(sbuffer), 0, 0, 0, 0, 0, 0 };
+		    waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+		    waveOutWrite(hWaveOut, &header, sizeof(WAVEHDR));
+		    waveOutUnprepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+		    waveOutClose(hWaveOut);
 
-            Sleep(8000 * 1000);
-        }
+		    Sleep(8000 * 1000);
+		}
 
-        return 0x00;
-    }
+		return 0x00;
+	}
 
-    DWORD WINAPI Bytebeat2(LPVOID lpvd)
-    {
-        while (1)
-        {
-            HWAVEOUT hWaveOut = 0;
-            WAVEFORMATEX wfx = { WAVE_FORMAT_PCM, 1, 8000, 8000, 1, 8, 0 };
-            waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
+    	DWORD WINAPI Bytebeat2(LPVOID lpvd)
+	{
+		while (1)
+		{
+		    HWAVEOUT hWaveOut = 0;
+		    WAVEFORMATEX wfx = { WAVE_FORMAT_PCM, 1, 8000, 8000, 1, 8, 0 };
+		    waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
 
-            BYTE sbuffer[17000 * 60];
+		    BYTE sbuffer[17000 * 60];
 
-            DWORD d = 1000;
-            DWORD c = 0;
+		    DWORD d = 1000;
+		    DWORD c = 0;
 
-            for (DWORD t = 0; t < sizeof(sbuffer); t++)
-            {
-                if (c == 10000)
-                {
-                    d = rand() % 5000;
-                    if (d < 500) d += 300;
+		    for (DWORD t = 0; t < sizeof(sbuffer); t++)
+		    {
+			if (c == 10000)
+			{
+			    d = rand() % 5000;
+			    if (d < 500) d += 300;
 
-                    c = 0;
-                }
+			    c = 0;
+			}
 
-                int freq = 20 + (c / d);
-                sbuffer[t] = (c * 12) % (freq * 10);
+			int freq = 20 + (c / d);
+			sbuffer[t] = (c * 12) % (freq * 10);
 
-                c++;
-            }
+			c++;
+		    }
 
-            WAVEHDR header = { (LPSTR)sbuffer, sizeof(sbuffer), 0, 0, 0, 0, 0, 0 };
-            waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
-            waveOutWrite(hWaveOut, &header, sizeof(WAVEHDR));
-            waveOutUnprepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
-            waveOutClose(hWaveOut);
+		    WAVEHDR header = { (LPSTR)sbuffer, sizeof(sbuffer), 0, 0, 0, 0, 0, 0 };
+		    waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+		    waveOutWrite(hWaveOut, &header, sizeof(WAVEHDR));
+		    waveOutUnprepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+		    waveOutClose(hWaveOut);
 
-            Sleep(8000 * 1000);
-        }
+		    Sleep(8000 * 1000);
+		}
 
-        return 0x00;
-    }
+		return 0x00;
+    	}
 
     DWORD WINAPI Bytebeat3(LPVOID lpvd)
     {
@@ -101,7 +101,7 @@ namespace Bytebeats
             Sleep(8000 * 1000);
         }
 
-        return 0x00;
+    	return 0x00;
     }
 
 	DWORD WINAPI Bytebeat4(LPVOID lpvd)
