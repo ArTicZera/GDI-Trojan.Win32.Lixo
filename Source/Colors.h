@@ -13,7 +13,7 @@ typedef struct
 namespace Colors
 {
 	//These HSL functions was made by Wipet, credits to him!
-	//OBS: I used in 3 payloads
+	//OBS: I used it in 3 payloads
 	
 	//Btw I created HSV functions too, but it sucks unfortunatelly
 	//So I didn't used in this malware.
