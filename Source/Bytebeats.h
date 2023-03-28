@@ -77,91 +77,91 @@ namespace Bytebeats
 		return 0x00;
     	}
 
-    DWORD WINAPI Bytebeat3(LPVOID lpvd)
-    {
-        while (1)
-        {
-            HWAVEOUT hWaveOut = 0;
-            WAVEFORMATEX wfx = { WAVE_FORMAT_PCM, 1, 22050, 22050, 1, 8, 0 };
-            waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
-
-            BYTE sbuffer[17000 * 60];
-
-            for (DWORD t = 0; t < sizeof(sbuffer); t++)
-            {
-                sbuffer[t] = 0.001 * ((t << 1) * sin(t | 333));
-            }
-
-            WAVEHDR header = { (LPSTR)sbuffer, sizeof(sbuffer), 0, 0, 0, 0, 0, 0 };
-            waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
-            waveOutWrite(hWaveOut, &header, sizeof(WAVEHDR));
-            waveOutUnprepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
-            waveOutClose(hWaveOut);
-
-            Sleep(8000 * 1000);
-        }
-
-    	return 0x00;
-    }
-
-	DWORD WINAPI Bytebeat4(LPVOID lpvd)
-	{
-		while (1)
+    	DWORD WINAPI Bytebeat3(LPVOID lpvd)
+    	{
+        	while (1)
 		{
-            HWAVEOUT hWaveOut = 0;
-            WAVEFORMATEX wfx = { WAVE_FORMAT_PCM, 1, 44100, 44100, 1, 8, 0 };
-            waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
+		    HWAVEOUT hWaveOut = 0;
+		    WAVEFORMATEX wfx = { WAVE_FORMAT_PCM, 1, 22050, 22050, 1, 8, 0 };
+		    waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
 
-            BYTE sbuffer[17000 * 60];
+		    BYTE sbuffer[17000 * 60];
 
-            DWORD c = 0;
+		    for (DWORD t = 0; t < sizeof(sbuffer); t++)
+		    {
+			sbuffer[t] = 0.001 * ((t << 1) * sin(t | 333));
+		    }
 
-            for (DWORD t = 0; t < sizeof(sbuffer); t++) 
-            {
-                if (c == 516855) c = 0;
+		    WAVEHDR header = { (LPSTR)sbuffer, sizeof(sbuffer), 0, 0, 0, 0, 0, 0 };
+		    waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+		    waveOutWrite(hWaveOut, &header, sizeof(WAVEHDR));
+		    waveOutUnprepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+		    waveOutClose(hWaveOut);
 
-                sbuffer[t] = ((t >> 4) & 24555) * sin(t | 3);
-                c++;
-            }
-
-            WAVEHDR header = { (LPSTR)sbuffer, sizeof(sbuffer), 0, 0, 0, 0, 0, 0 };
-            waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
-            waveOutWrite(hWaveOut, &header, sizeof(WAVEHDR));
-            waveOutUnprepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
-            waveOutClose(hWaveOut);
-
-            Sleep(8000 * 1000);
+		    Sleep(8000 * 1000);
 		}
 
 		return 0x00;
 	}
 
-    DWORD WINAPI Bytebeat5(LPVOID lpvd)
-    {
-        while (1)
+	DWORD WINAPI Bytebeat4(LPVOID lpvd)
+	{
+		while (1)
+		{
+		    HWAVEOUT hWaveOut = 0;
+		    WAVEFORMATEX wfx = { WAVE_FORMAT_PCM, 1, 44100, 44100, 1, 8, 0 };
+		    waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
+
+		    BYTE sbuffer[17000 * 60];
+
+		    DWORD c = 0;
+
+		    for (DWORD t = 0; t < sizeof(sbuffer); t++) 
+		    {
+			if (c == 516855) c = 0;
+
+			sbuffer[t] = ((t >> 4) & 24555) * sin(t | 3);
+			c++;
+		    }
+
+		    WAVEHDR header = { (LPSTR)sbuffer, sizeof(sbuffer), 0, 0, 0, 0, 0, 0 };
+		    waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+		    waveOutWrite(hWaveOut, &header, sizeof(WAVEHDR));
+		    waveOutUnprepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+		    waveOutClose(hWaveOut);
+
+		    Sleep(8000 * 1000);
+		}
+
+		return 0x00;
+	}
+
+        DWORD WINAPI Bytebeat5(LPVOID lpvd)
         {
-            HWAVEOUT hWaveOut = 0;
-            WAVEFORMATEX wfx = { WAVE_FORMAT_PCM, 1, 44100, 44100, 1, 8, 0 };
-            waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
+		while (1)
+		{
+		    HWAVEOUT hWaveOut = 0;
+		    WAVEFORMATEX wfx = { WAVE_FORMAT_PCM, 1, 44100, 44100, 1, 8, 0 };
+		    waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
 
-            BYTE sbuffer[17000 * 60];
+		    BYTE sbuffer[17000 * 60];
 
-            for (DWORD t = 0; t < sizeof(sbuffer); t++)
-            {
-                BYTE sound = 0.01 * (t * (t & 100000) >> 1000);
-                sbuffer[t] = sound;
-            }
+		    for (DWORD t = 0; t < sizeof(sbuffer); t++)
+		    {
+			BYTE sound = 0.01 * (t * (t & 100000) >> 1000);
+			sbuffer[t] = sound;
+		    }
 
-            WAVEHDR header = { (LPSTR)sbuffer, sizeof(sbuffer), 0, 0, 0, 0, 0, 0 };
-            waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
-            waveOutWrite(hWaveOut, &header, sizeof(WAVEHDR));
-            waveOutUnprepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
-            waveOutClose(hWaveOut);
+		    WAVEHDR header = { (LPSTR)sbuffer, sizeof(sbuffer), 0, 0, 0, 0, 0, 0 };
+		    waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+		    waveOutWrite(hWaveOut, &header, sizeof(WAVEHDR));
+		    waveOutUnprepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+		    waveOutClose(hWaveOut);
 
-            Sleep(8000 * 1000);
-        }
+		    Sleep(8000 * 1000);
+		}
 
-        return 0x00;
+		return 0x00;
     }
 
     DWORD WINAPI Bytebeat6(LPVOID lpvd)
