@@ -151,7 +151,6 @@ namespace GDIPayloads
 			{
 				for (int y = 0; y < h; y++)
 				{
-
 					int index = y * w + x;
 
 					FLOAT fx = (x + i) ^ (y + i);
