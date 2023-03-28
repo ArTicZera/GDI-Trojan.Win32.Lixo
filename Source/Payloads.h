@@ -40,7 +40,7 @@ namespace GDIPayloads
 		{
 			//This effect is just cool bcz of these StretchBlt Mode
 			SetStretchBltMode(dcCopy, COLORONCOLOR);
-		    SetStretchBltMode(dc, COLORONCOLOR);
+		    	SetStretchBltMode(dc, COLORONCOLOR);
 
 			StretchBlt(dcCopy, 0, 0, w / 3, h / 3, dc, 0, 0, w, h, SRCCOPY);
 			StretchBlt(dc, 0, 0, w, h, dcCopy, 0, 0, w / 3, h / 3, SRCCOPY);
