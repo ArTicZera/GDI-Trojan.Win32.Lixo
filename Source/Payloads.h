@@ -204,7 +204,7 @@ namespace GDIPayloads
 					int index = y * w + x;
 					int j = 4 * i;
 
-					int fx = (int)(j + (j * sin(x / 16.0)) + j + (j * sin(y / 8.0)) + j + (j * sin((x + y) / 16.0)) + j + (j * sin(sqrt((double)(x * x + y * y)) / 8.0))) / 4;;
+					int fx = (int)(j + (j * sin(x / 16.0)) + j + (j * sin(y / 8.0)) + j + (j * sin((x + y) / 16.0)) + j + (j * sin(sqrt((double)(x * x + y * y)) / 8.0))) / 4;
 
 					rgbquadCopy = rgbquad[index];
 
