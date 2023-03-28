@@ -8,15 +8,19 @@ call setup
 call palette
 
 setup:
+	;Setup Mode 13h
 	mov ah, 0x00
 	mov al, 0x13
 	int 0x10
 		
+	;Setup Video Segment
 	push 0xA000
 	pop es
 		
+	;Write graphics pixel function
 	mov ah, 0x0C
 
+	;Setup some registers
 	xor al, al   ;AL = Color
 	xor bx, bx   ;BX = Page
 	xor cx, cx   ;CX = X
@@ -257,36 +261,46 @@ nextline:
 ;-------------------------------------	
 
 text:	
+	;Save AX and BX for later
 	push ax
 	push bx
 
+	;Setup Data Segment
 	mov ax, cx
 	mov ds, ax
 
+	;Teletype Output
 	mov ah, 0x0E
-		
+	
 	mov si, string
 	mov al, [si]
 		
-	mov bh, 0x00
+	xor bh, bh
 		
 	returnFirstColor:
+		;Min Color
 		mov bl, 32
 		
 		printLoop:
+			;Next color
 			inc bl
-						
+				
+			;Max color
 			cmp bl, 55
 			je returnFirstColor
-				
+			
+			;Print char
 			int 10h
-						
+				
+			;Next char
 			inc si
 			mov al, [si]
-						
+				
+			;0x00 is the last string's char
 			cmp al, 0x00
 			jnz printLoop
 
+			;Restore AX and BX values
 			pop bx
 			pop ax						
 						
@@ -294,6 +308,7 @@ text:
 
 ;-------------------------------------	
 
+;
 string: db "IT LOOKS LIKE YOU'RE HAVING A BAD DREAM!", 0x00
 color: dw 0		
 
@@ -305,6 +320,9 @@ zy: dd 0.0
 
 a: dd 0.0
 b: dd 0.0
-			
+
+;-------------------------------------
+	
+;MBR Signature
 times 510 - ($ - $$) db 0
 dw 0xAA55
