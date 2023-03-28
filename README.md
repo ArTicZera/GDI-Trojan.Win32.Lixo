@@ -1,2 +1,8 @@
-# GDI-Trojan.Win32.Lixo
-Small malware made by me for educational &amp; entertainment purposes. It modifies some registry keys, make copies of it self, overwrites the bootsector, show some GDI-Effects, play some Bytebeats and etc.
+# 🤔 What is Lixo.exe?
+Lixo.exe is a small trojan made in C++ and 8086 Assembly. In general, it modifies some registry keys, create copies of it self to critical Windows directories, play some bytebeats, show some GDI-Effects, overwrites the bootsector (MBR) to 10 Payloads made in ASM, and many other things.
+
+# ⚠️ Important!!!
+
+# 🤝 Credits
+
+# 🎬 Lixo Showcase
