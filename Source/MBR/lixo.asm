@@ -25,6 +25,9 @@ setup:
 	xor bx, bx   ;BX = Page
 	xor cx, cx   ;CX = X
 	mov dx, 0x08 ;DX = Y
+	
+	;Initialize FPU
+	fninit
 		
 	call text
 		
@@ -33,14 +36,20 @@ setup:
 ;-------------------------------------			
 		
 reset:	
+	;Start all over again
 	xor cx, cx
 	mov dx, 0x08
+	
+	;COLOR++
 	inc word [color]
 		
 	palette:
+		;Store CX and DX to use it later
+		;using FPU instructions
 		mov word [x], cx
 		mov word [y], dx
 		
+		;Payload's execution system
 		cmp word [color], 2048
 		ja crash
 				
@@ -70,14 +79,20 @@ reset:
 		jb statics
 				
 		setpixel:
+			;If the pixel reachs the border at the right
+			;Go to the next line
 			cmp cx, WSCREEN
 			jae nextline
-						
+					
+			;If the screen gets completly full of pixels
+			;Reset again
 			cmp dx, HSCREEN
 			jae reset
 
+			;Set Pixel
 			int 0x10
 
+			;Go to the next pixel
 			inc cx
 			jmp palette
 						
@@ -86,7 +101,7 @@ reset:
 ;-------------------------------------	
 
 statics:	
-	;A = sin(A)
+	;X = sin(X)
 	fild dword [x]
 	fsin
 	fstp dword [x]
@@ -99,10 +114,12 @@ statics:
 	jmp GRAY
 
 scroll:
+	;I could optimize this
+	;But I don't want lol
         mov bp, cx
         add bp, [color]
-        
         mov bx, bp
+	
         add bl, [color]
         shr bl, 2
         
@@ -112,6 +129,7 @@ scroll:
 	jmp HSV
 
 xorfractal:
+	;X XOR Y
         mov bx, cx
         xor bx, dx
         
@@ -162,6 +180,7 @@ parabola:
 	jmp HSV
 		
 squares:
+	;X * Y
 	fild word [x]
 	fmul dword [y]
 	fstp dword [x]
@@ -174,6 +193,7 @@ squares:
 		
 		
 sierpinski:
+	;X AND Y
 	mov bx, cx
         and bx, dx
         
@@ -201,6 +221,7 @@ circles:
         mov bx, word [a]
         add word [b], bx
         
+	;Zoom it
         mov al, [b]
         shr al, 3
         
@@ -209,12 +230,16 @@ circles:
 	jmp HSV
 		
 crash:
+	;Restart the program again from the beginning
 	mov ax, 0x03
 	int 0x19
 		
 ;-------------------------------------	
 		
 HSV:
+	;It's not really HSV, I just named it
+	;Like this because it's cool
+	
 	cmp al, 55
         ja delhsv
         
@@ -311,6 +336,8 @@ text:
 ;Define some variables to use it
 
 string: db "IT LOOKS LIKE YOU'RE HAVING A BAD DREAM!", 0x00
+
+;This variable is more a "counter" than color
 color: dw 0		
 
 x: dw 0
