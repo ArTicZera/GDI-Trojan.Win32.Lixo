@@ -8,95 +8,91 @@ call setup
 call palette
 
 setup:
-		mov ah, 0x00
-		mov al, 0x13
-		int 0x10
+	mov ah, 0x00
+	mov al, 0x13
+	int 0x10
+		
+	push 0xA000
+	pop es
+		
+	mov ah, 0x0C
 
-		mov ax, 0xA000
-		mov es, ax
+	xor al, al   ;AL = Color
+	xor bx, bx   ;BX = Page
+	xor cx, cx   ;CX = X
+	mov dx, 0x08 ;DX = Y
 		
-		mov ah, 0x0C
-
-		xor al, al   ;AL = Color
-		xor bx, bx   ;BX = Page
-		xor cx, cx   ;CX = X
-		mov dx, 0x08 ;DX = Y
+	call text
 		
-		call text
-		
-		ret
+	ret
 
 ;-------------------------------------			
 		
 reset:	
-		xor cx, cx
-		mov dx, 0x08
-		inc word [color]
+	xor cx, cx
+	mov dx, 0x08
+	inc word [color]
 		
-		palette:
-				mov word [x], cx
-				mov word [y], dx
+	palette:
+		mov word [x], cx
+		mov word [y], dx
 		
-				cmp word [color], 2048
-				ja crash
+		cmp word [color], 2048
+		ja crash
 				
-				;cmp word [color], 1792
-				;ja circles
+		cmp word [color], 1792
+		ja circles
 				
-				;cmp word [color], 1536
-				;ja sierpinski
+		cmp word [color], 1536
+		ja sierpinski
 		
-				;cmp word [color], 1280
-				;ja squares
+		cmp word [color], 1280
+		ja squares
 		
-		        cmp word [color], 1024
-				ja parabola
+		cmp word [color], 1024
+		ja parabola
 		
-				cmp word [color], 768
-				ja hearts
+		cmp word [color], 768
+		ja hearts
 				
-				cmp word [color], 512
-				ja stars
+		cmp word [color], 512
+		ja stars
 				
-				cmp word [color], 256
-				ja xorfractal
+		cmp word [color], 256
+		ja xorfractal
 				
-				cmp word [color], 30
-				ja scroll
-				jb statics
+		cmp word [color], 30
+		ja scroll
+		jb statics
 				
-				setpixel:
-						cmp cx, WSCREEN
-						jae nextline
+		setpixel:
+			cmp cx, WSCREEN
+			jae nextline
 						
-						cmp dx, HSCREEN
-						jae reset
+			cmp dx, HSCREEN
+			jae reset
 
-						int 0x10
+			int 0x10
 
-						inc cx
-						jmp palette
+			inc cx
+			jmp palette
 						
-						ret
+			ret
 
 ;-------------------------------------	
 
-statics:
-		fild word [y]
-		fdiv dword [a]
-		fstp dword [b]
+statics:	
+	;A = sin(A)
+	fild dword [x]
+	fsin
+	fstp dword [x]
 		
-		;A = sin(A)
-		fild dword [x]
-		fsin
-		fstp dword [x]
+	mov al, [x]
+	add al, [color]
+	add al, [color]
+	add al, [color]
 		
-		mov al, [x]
-		add al, [color]
-		add al, [color]
-		add al, [color]
-		
-		jmp GRAY
+	jmp GRAY
 
 scroll:
         mov bp, cx
@@ -109,7 +105,7 @@ scroll:
         mov al, bl
         shr al, 1
 		
-		jmp HSV
+	jmp HSV
 
 xorfractal:
         mov bx, cx
@@ -117,26 +113,25 @@ xorfractal:
         
         add bl, [color]
         mov al, bl
-        shr al, 2 ;div 4
-		;inc word [color]
+        shr al, 2
         
         jmp HSV
 		
 stars:
-		push ax
-			add bx, cx
+	push ax
+		add bx, cx
 				
-			mov ax, cx
-			xor ax, dx
-			xor ax, cx
+		mov ax, cx
+		xor ax, dx
+		xor ax, cx
 				
-			sub bl, al
-		pop ax
+		sub bl, al
+	pop ax
         
         mov al, bl
         shr al, 2
 		
-		jmp GRAY
+	jmp GRAY
 		
 hearts:
         push ax
@@ -151,7 +146,7 @@ hearts:
         mov al, bl
         shr al, 2
 		
-		jmp HSV
+	jmp HSV
 		
 parabola:
         add bx, cx
@@ -160,22 +155,22 @@ parabola:
         mov al, bl
         shr al, 2
 		
-		jmp HSV
+	jmp HSV
 		
 squares:
-		fild word [x]
-		fmul dword [y]
-		fstp dword [x]
+	fild word [x]
+	fmul dword [y]
+	fstp dword [x]
 
-		mov al, [x]
-		add al, [color]
-		shr al, 2
+	mov al, [x]
+	add al, [color]
+	shr al, 2
 		
-		jmp HSV
+	jmp HSV
 		
 		
 sierpinski:
-		mov bx, cx
+	mov bx, cx
         and bx, dx
         
         add bl, [color]
@@ -185,8 +180,8 @@ sierpinski:
         jmp HSV
 		
 circles:
-		mov word [zx], cx
-		mov word [zy], dx
+	mov word [zx], cx
+	mov word [zy], dx
 
         ;A = X * X 
         fild dword [zx]
@@ -207,25 +202,22 @@ circles:
         
         sub al, [color]
 		
-		jmp HSV
+	jmp HSV
 		
 crash:
-		shr al, 2
-	    shr al, 2
-	    dec al
-		
-		out dx, al
+	mov ax, 0x03
+	int 0x19
 		
 ;-------------------------------------	
 		
 HSV:
-		cmp al, 55
+	cmp al, 55
         ja delhsv
         
         cmp al, 32
         jb addhsv
 		
-		jmp setpixel
+	jmp setpixel
 
 delhsv:
         sub al, 16
@@ -238,73 +230,67 @@ addhsv:
 ;-------------------------------------			
 		
 GRAY:
-		cmp al, 31
+	cmp al, 31
         ja delgray
         
         cmp al, 16
         jb addgray
 		
-		jmp setpixel
+	jmp setpixel
 		
 delgray:
-		sub al, 16
+	sub al, 16
         jmp GRAY
 
 addgray:
-		add al, 32
+	add al, 32
         jmp GRAY
 		
 ;-------------------------------------	
                 
 nextline:
-                xor cx, cx
-                inc dx
+        xor cx, cx
+        inc dx
 
-                jmp palette 
+        jmp palette 
 						
 ;-------------------------------------	
 
 text:	
-		push ax
-		push bx
-		push cx
-		push dx
+	push ax
+	push bx
 
-		mov ax, cx
-		mov ds, ax
+	mov ax, cx
+	mov ds, ax
 
-		mov ah, 0x0E
+	mov ah, 0x0E
 		
-		mov si, string
-		mov al, [si]
+	mov si, string
+	mov al, [si]
 		
-		mov bh, 0x00
+	mov bh, 0x00
 		
-		returnFirstColor:
-				mov bl, 32
-				printLoop:
-						inc bl
+	returnFirstColor:
+		mov bl, 32
+		
+		printLoop:
+			inc bl
 						
-						cmp bl, 55
-						je returnFirstColor
+			cmp bl, 55
+			je returnFirstColor
 				
-						int 10h
+			int 10h
 						
-						rep stosw
+			inc si
+			mov al, [si]
 						
-						inc si
-						mov al, [si]
-						
-						
-						cmp al, 0x00
-						jnz printLoop
+			cmp al, 0x00
+			jnz printLoop
 
-						pop dx
-						pop cx
-						pop bx
-						pop ax						
+			pop bx
+			pop ax						
 						
-						ret
+			ret
 
 ;-------------------------------------	
 
@@ -320,5 +306,5 @@ zy: dd 0.0
 a: dd 0.0
 b: dd 0.0
 			
-times 1022 - ($ - $$) db 0
+times 510 - ($ - $$) db 0
 dw 0xAA55
