@@ -308,7 +308,8 @@ text:
 
 ;-------------------------------------	
 
-;
+;Define some variables to use it
+
 string: db "IT LOOKS LIKE YOU'RE HAVING A BAD DREAM!", 0x00
 color: dw 0		
 
