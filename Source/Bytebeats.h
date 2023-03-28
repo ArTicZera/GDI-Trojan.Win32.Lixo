@@ -10,27 +10,27 @@ namespace Bytebeats
 	{
 		while (1)
 		{
-		    HWAVEOUT hWaveOut = 0;
-		    WAVEFORMATEX wfx = { WAVE_FORMAT_PCM, 1, 8000, 8000, 1, 8, 0 };
-		    waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
+		    	HWAVEOUT hWaveOut = 0;
+			WAVEFORMATEX wfx = { WAVE_FORMAT_PCM, 1, 8000, 8000, 1, 8, 0 };
+		    	waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
 
-		    BYTE sbuffer[17000 * 60];
+		    	BYTE sbuffer[17000 * 60];
 
-		    DWORD d = 1000;
-		    DWORD c = 0;
+		    	DWORD d = 1000;
+		    	DWORD c = 0;
 
-		    for (DWORD t = 0; t < sizeof(sbuffer); t++)
-		    {
-			sbuffer[t] = t * sinf((PI * t * 2 / 100000));
-		    }
+		    	for (DWORD t = 0; t < sizeof(sbuffer); t++)
+		    	{
+				sbuffer[t] = t * sinf((PI * t * 2 / 100000));
+		    	}
 
-		    WAVEHDR header = { (LPSTR)sbuffer, sizeof(sbuffer), 0, 0, 0, 0, 0, 0 };
-		    waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
-		    waveOutWrite(hWaveOut, &header, sizeof(WAVEHDR));
-		    waveOutUnprepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
-		    waveOutClose(hWaveOut);
+		    	WAVEHDR header = { (LPSTR)sbuffer, sizeof(sbuffer), 0, 0, 0, 0, 0, 0 };
+		    	waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+		    	waveOutWrite(hWaveOut, &header, sizeof(WAVEHDR));
+		    	waveOutUnprepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+		    	waveOutClose(hWaveOut);
 
-		    Sleep(8000 * 1000);
+		    	Sleep(8000 * 1000);
 		}
 
 		return 0x00;
