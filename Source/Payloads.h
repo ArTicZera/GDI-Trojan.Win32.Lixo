@@ -235,7 +235,6 @@ namespace GDIPayloads
 		bmpi.bmiHeader.biCompression = BI_RGB;
 
 		RGBQUAD* rgbquad = NULL;
-		HSL hslcolor;
 
 		bmp = CreateDIBSection(dc, &bmpi, DIB_RGB_COLORS, (void**)&rgbquad, NULL, 0);
 		SelectObject(dcCopy, bmp);
@@ -364,7 +363,6 @@ namespace GDIPayloads
 		bmpi.bmiHeader.biCompression = BI_RGB;
 
 		RGBQUAD* rgbquad = NULL;
-		HSL hslcolor;
 
 		bmp = CreateDIBSection(dc, &bmpi, DIB_RGB_COLORS, (void**)&rgbquad, NULL, 0);
 		SelectObject(dcCopy, bmp);
@@ -411,7 +409,6 @@ namespace GDIPayloads
 		bmpi.bmiHeader.biCompression = BI_RGB;
 
 		RGBQUAD* rgbquad = NULL;
-		HSL hslcolor;
 
 		bmp = CreateDIBSection(dc, &bmpi, DIB_RGB_COLORS, (void**)&rgbquad, NULL, 0);
 		SelectObject(dcCopy, bmp);
