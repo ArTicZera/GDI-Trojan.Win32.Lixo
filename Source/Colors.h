@@ -15,7 +15,7 @@ namespace Colors
 	//These HSL functions was made by Wipet, credits to him!
 	//OBS: I used it in 3 payloads
 	
-	//Btw I created HSV functions too, but it sucks unfortunatelly
+	//Btw I created HSV functions, but it sucks unfortunatelly
 	//So I didn't used in this malware.
 
 	HSL rgb2hsl(RGBQUAD rgb)
