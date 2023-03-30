@@ -178,12 +178,12 @@ namespace Bytebeats
 			{
 				float x = (t / 44100.0f);
 
-				float sin_wave = sinf(x * 3000.0f * sinf(x * 4.0f + sinf(x * 2.0f)));
-				float saw_wave = (1.0f / PI) * atanf(1.0f / tanf(x * 5000.0f));
-				float tri_wave = (1.0f / PI) * asinf(sinf(x * 8000.0f));
-				float square_wave = (1.0f / PI) * atanf(sinf(x * 10000.0f));
+				float alpha = sinf(x * 3000.0f * sinf(x * 4.0f + sinf(x * 2.0f)));
+				float beta = (1.0f / PI) * atanf(1.0f / tanf(x * 5000.0f));
+				float gamma = (1.0f / PI) * asinf(sinf(x * 8000.0f));
+				float delta = (1.0f / PI) * atanf(sinf(x * 10000.0f));
 
-				float sound = sin_wave + saw_wave + tri_wave + square_wave;
+				float sound = alpha + beta + gamma + delta;
 
 				sbuffer[t] = (sound * 127.0f);
 			}
