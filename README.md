@@ -1,5 +1,5 @@
 # 🤔 What is Lixo.exe?
-Lixo.exe is a small trojan made in C++ and 8086 Assembly. In general, it modifies some registry keys, create copies of itself to critical Windows directories, play some bytebeats, show some GDI-Effects, overwrites the bootsector (MBR) to 10 Payloads made in ASM, and many other things. By the way, this is my 3rd GDI-Trojan and probably the last one...
+Lixo.exe is a small trojan made in C++ and 8086 Assembly for WINDOWS XP. In general, it modifies some registry keys, create copies of itself to critical Windows directories, play some bytebeats, show some GDI-Effects, overwrites the bootsector (MBR) to 10 Payloads made in ASM, and many other things. By the way, this is my 3rd GDI-Trojan and probably the last one...
 
 # ⚠️ Important!!!
 This is a <b>potentially harmful program</b> that can cause your <b>system's death</b> & <b>data loss</b>. This software also displays flashing lights and plays loud sounds, so if you have a photosensitive disease like epilepsy, don't run this or watch any video about it for your security.
