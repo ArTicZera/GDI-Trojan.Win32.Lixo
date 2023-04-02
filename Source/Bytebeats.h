@@ -148,8 +148,7 @@ namespace Bytebeats
 
 		    	for (DWORD t = 0; t < sizeof(sbuffer); t++)
 		    	{
-				BYTE sound = 0.01 * (t * (t & 100000) >> 1000);
-				sbuffer[t] = sound;
+				sbuffer[t] = 0.01 * (t * (t & 100000) >> 1000);
 		    	}
 
 		    	WAVEHDR header = { (LPSTR)sbuffer, sizeof(sbuffer), 0, 0, 0, 0, 0, 0 };
@@ -176,12 +175,12 @@ namespace Bytebeats
 
 			for (int t = 0; t < sizeof(sbuffer); t++)
 			{
-				float x = (t / 44100.0f);
+				float i = (t / 44100.0f);
 
-				float alpha = sinf(x * 3000.0f * sinf(x * 4.0f + sinf(x * 2.0f)));
-				float beta = (1.0f / PI) * atanf(1.0f / tanf(x * 5000.0f));
-				float gamma = (1.0f / PI) * asinf(sinf(x * 8000.0f));
-				float delta = (1.0f / PI) * atanf(sinf(x * 10000.0f));
+				float alpha = sinf(i * 3000.0f * sinf(i * 4.0f + sinf(i * 2.0f)));
+				float beta = (1.0f / PI) * atanf(1.0f / tanf(i * 5000.0f));
+				float gamma = (1.0f / PI) * asinf(sinf(i * 8000.0f));
+				float delta = (1.0f / PI) * atanf(sinf(i * 10000.0f));
 
 				float sound = alpha + beta + gamma + delta;
 
