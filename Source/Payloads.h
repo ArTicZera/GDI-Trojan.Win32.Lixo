@@ -38,7 +38,6 @@ namespace GDIPayloads
 
 		while (1)
 		{
-			//This effect is just cool bcz of these StretchBlt Mode
 			SetStretchBltMode(dcCopy, COLORONCOLOR);
 		    	SetStretchBltMode(dc, COLORONCOLOR);
 
@@ -204,6 +203,7 @@ namespace GDIPayloads
 					int index = y * w + x;
 					int j = 4 * i;
 
+					//Old-School Plasma effect
 					int fx = (int)(j + (j * sin(x / 16.0)) + j + (j * sin(y / 8.0)) + j + (j * sin((x + y) / 16.0)) + j + (j * sin(sqrt((double)(x * x + y * y)) / 8.0))) / 4;
 
 					rgbquadCopy = rgbquad[index];
