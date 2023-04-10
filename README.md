@@ -6,6 +6,8 @@ This is a <b>potentially harmful program</b> that can cause your <b>system's dea
 
 By running this program, you accept full responsibility for any damages that may occur. So, the creator (ArTic a.k.a JhoPro) will not be responsible for anything caused by this software. By the way, this was created for educational and entertainment purposes, consequently, don't use it to do malicious acts like sharing with a friend.
 
+If you also see a bug, report to me in some way, contact: ArTic🌊#1892
+
 # 🤝 Credits
 Joaozin_ & DeadBoot & Mist - Beta testers. <br/>
 Rekto - We built the AlphaBlend effect together. <br/>
