@@ -8,6 +8,9 @@ By running this program, you accept full responsibility for any damages that may
 
 If you also see a bug, report to me in some way, contact: ArTic🌊#1892
 
+# 🤔 Execution tip
+I forgot talking this before, but when I watched back some videos about Lixo.exe, I realized how badly is the optimization... So, I recommend you running it in a decreased resolution to get a really cool experience and not laggy. Thanks for reading it!
+
 # 🤝 Credits
 Joaozin_ & DeadBoot & Mist - Beta testers. <br/>
 Rekto - We built the AlphaBlend effect together. <br/>
