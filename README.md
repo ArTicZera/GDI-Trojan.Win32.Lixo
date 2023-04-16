@@ -13,6 +13,7 @@ I forgot talking this before, but when I watched back some videos about Lixo.exe
 
 # 💊 What is the difference about LixoDestructive and LixoSafe?
 As the name says, LixoDestructive is the version that includes the destruction. This version is recommended just for people that uses Virtual Machine or a Sandbox.    
+
 Otherwise, LixoSafe is the version that doesn't include the destruction (TOTALLY HARMLESS). So it won't overwrite the MBR, create copies of itself and modify and create registry keys. By the way, you don't need to run it on a Virtual Machine or a Sandbox. Just choose your preference...
 
 # 🤡 For Skidders
