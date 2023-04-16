@@ -11,6 +11,10 @@ If you also see a bug, report to me in some way, contact: ArTic🌊#1892
 # 🤔 Execution tip
 I forgot talking this before, but when I watched back some videos about Lixo.exe, I realized how badly is the optimization... So, I recommend you running it in a decreased resolution to get a really cool experience and not laggy. Thanks for reading it!
 
+# 💊 What is the difference about LixoDestructive and LixoSafe?
+As the name says, LixoDestructive is the version that includes the destruction. This version is recommended just for people that uses Virtual Machine or a Sandbox.    
+Otherwise, LixoSafe is the version that doesn't include the destruction (TOTALLY HARMLESS). So it won't overwrite the MBR, create copies of itself and modify and create registry keys. By the way, you don't need to run it on a Virtual Machine or a Sandbox. Just choose your preference...
+
 # 🤝 Credits
 Joaozin_ & DeadBoot & Mist - Beta testers. <br/>
 Rekto - We built the AlphaBlend effect together. <br/>
