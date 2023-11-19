@@ -61,6 +61,9 @@ namespace System
 		if (i == 1) i = date.tm_mon;  //0-11
 		if (i == 2) i = date.tm_year; //XXXX
 
+		//Actually the return value for the year is
+		//The year of the system - 1900. 
+
 		return i;
 	}
 }
